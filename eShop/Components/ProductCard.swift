@@ -13,28 +13,32 @@ struct ProductCard: View {
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            ZStack(alignment: .bottom) {
-                Image(product.image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 180, height: 250)
+            NavigationLink {
+                ProductDetailsView(product: product)
+                    .environmentObject(cartManager)
+            } label: {
+                ZStack(alignment: .bottom) {
+                    Image(product.image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 180, height: 250)
+                        .cornerRadius(20)
+                    VStack(alignment: .leading) {
+                        Text(product.name)
+                            .bold()
+                            .lineLimit(1)
+                        Text("\(product.price)$")
+                            .font(.caption)
+                    }
+                    .padding()
+                    .frame(width: 180, alignment: .leading)
+                    .background(.ultraThinMaterial)
                     .cornerRadius(20)
-                
-                VStack(alignment: .leading) {
-                    Text(product.name)
-                        .bold()
-                        .lineLimit(1)
-                    Text("\(product.price)$")
-                        .font(.caption)
+                    
                 }
-                .padding()
-                .frame(width: 180, alignment: .leading)
-                .background(.ultraThinMaterial)
-                .cornerRadius(20)
-                
+                .frame(width: 180, height: 250)
+                .shadow(radius: 3)
             }
-            .frame(width: 180, height: 250)
-            .shadow(radius: 3)
             
             Button {
                 cartManager.addToCart(product: product)
@@ -47,8 +51,6 @@ struct ProductCard: View {
                     .padding()
             }
         }
-        
-        
     }
 }
 
