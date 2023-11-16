@@ -1,2 +1,2 @@
 # eShop
-eShop is a e-commerce app made with SwiftUI.
+eShop is an e-commerce app made with SwiftUI.
